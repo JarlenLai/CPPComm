@@ -21,5 +21,5 @@
  * limitations under the License.
  */
 
-#include "stdafx.h"
+#include "..\stdafx.h"
 #include "bufferptr.h"

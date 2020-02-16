@@ -1,50 +1,10 @@
-/*
- * Copyright: JessMA Open Source (ldcsaa@gmail.com)
- *
- * Author	: Bruce Liang
- * Website	: https://github.com/ldcsaa
- * Project	: https://github.com/ldcsaa/HP-Socket/HP-Socket
- * Blog		: http://www.cnblogs.com/ldcsaa
- * Wiki		: http://www.oschina.net/p/hp-socket
- * QQ Group	: 44636872, 75375912
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 #pragma once
 
 #include <memory.h>
 #include <malloc.h>
 
-
- // 使用偏特化判断模板是否为指定类型，这里用于判断模板类型是否为double型
-template <typename T>
-struct is_char
-{
-	operator bool()
-	{
-		return false;
-	}
-};
-
-template <>
-struct is_char<double>
-{
-	operator bool()
-	{
-		return true;
-	}
-};
+#define MyMax(a, b) ((a)>(b) ? (a):(b))
+#define MyMin(a, b) ((a)<(b) ? (a):(b))
 
 template<class T, size_t MAX_CACHE_SIZE = 0>
 class CBufferPtrT
@@ -192,7 +152,7 @@ public:
 
 private:
 	void Reset()						{m_pch = 0; m_size = 0; m_capacity = 0;}
-	size_t GetAllocSize(size_t size)	{return max(size, min(size * 2, m_size + MAX_CACHE_SIZE));}
+	size_t GetAllocSize(size_t size)	{return MyMax(size, MyMin(size * 2, m_size + MAX_CACHE_SIZE));}
 
 	T* Alloc(size_t size, bool zero = false, bool is_realloc = false)
 	{
