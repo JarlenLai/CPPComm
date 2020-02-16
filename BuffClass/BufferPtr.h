@@ -23,7 +23,7 @@ public:
 		va_end(arg_ptr);
 
 		Reset();
-		Copy(pBuff, strlen(pBuff));
+		Copy(pBuff, strlen(pBuff)+1);
 		delete[] pBuff;
 	}
 
